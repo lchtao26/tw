@@ -43,17 +43,23 @@ describe('store', () => {
     assert.equal(storePath(), path.join(tempHome, 'playgrounds'));
   });
 
-  test('validateName accepts valid slugs', () => {
-    assert.doesNotThrow(() => validateName('demo'));
-    assert.doesNotThrow(() => validateName('hover-tricks'));
-    assert.doesNotThrow(() => validateName('a1'));
+  test('validateName accepts filesystem-safe labels', () => {
+    assert.equal(validateName('demo'), 'demo');
+    assert.equal(validateName('Hover Tricks'), 'Hover Tricks');
+    assert.equal(validateName('  demo  '), 'demo');
+    assert.equal(validateName('demo (v2)'), 'demo (v2)');
+    assert.equal(validateName('网格实验'), '网格实验');
   });
 
-  test('validateName rejects invalid slugs', () => {
-    assert.throws(() => validateName(''), TwError);
-    assert.throws(() => validateName('Demo'), TwError);
-    assert.throws(() => validateName('-demo'), TwError);
-    assert.throws(() => validateName('demo_tricks'), TwError);
+  test('validateName rejects unsafe names with specific errors', () => {
+    assert.throws(() => validateName(''), /required/u);
+    assert.throws(() => validateName('   '), /required/u);
+    assert.throws(() => validateName('.'), /cannot be "." or ".."/u);
+    assert.throws(() => validateName('..'), /cannot be "." or ".."/u);
+    assert.throws(() => validateName('foo/bar'), /cannot contain "\/"/u);
+    assert.throws(() => validateName('demo:v2'), /cannot contain ":"/u);
+    assert.throws(() => validateName('CON'), /reserved/u);
+    assert.throws(() => validateName('name\u0007bad'), /control characters/u);
   });
 
   test('listPlaygrounds returns sorted names and empty list when store missing', () => {
@@ -72,11 +78,16 @@ describe('store', () => {
     assert.equal(fs.existsSync(path.join(playgroundPath('demo'), 'index.html')), true);
     assert.equal(fs.existsSync(path.join(playgroundPath('demo'), 'src', 'main.css')), true);
 
-    assert.throws(() => createPlayground('demo'), TwError);
+    assert.throws(() => createPlayground('  demo  '), TwError);
+  });
+
+  test('createPlayground accepts names with spaces', () => {
+    createPlayground('Hover Tricks');
+    assert.equal(playgroundExists('Hover Tricks'), true);
   });
 
   test('createPlayground rejects invalid names', () => {
-    assert.throws(() => createPlayground('Bad Name'), TwError);
+    assert.throws(() => createPlayground('foo/bar'), TwError);
   });
 
   test('removePlayground deletes an existing playground', () => {

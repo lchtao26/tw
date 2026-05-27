@@ -89,9 +89,17 @@ Playgrounds are stored globally for your user, not inside whatever project direc
 
 ## Playground names
 
-Use lowercase slugs: letters, numbers, and hyphens. Examples: `demo`, `hover-tricks`, `grid-lab`.
+Use any readable label: spaces, mixed case, and unicode are fine. Examples: `demo`, `Hover Tricks`, `网格实验`.
 
-Invalid names are rejected — nothing is auto-renamed for you.
+These are rejected:
+
+- empty names (including whitespace-only)
+- `.` and `..`
+- path separators (`/` `\`) and Windows-forbidden characters (`< > : " | ? *`)
+- control characters
+- reserved Windows device names (`CON`, `NUL`, `COM1`, …)
+
+Names are trimmed and stored as-is — nothing is auto-renamed. Use quotes when a name contains spaces: `tw add "Hover Tricks"`.
 
 ## Notes
 

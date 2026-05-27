@@ -5,7 +5,7 @@
 ## Language
 
 **Playground**:
-A slug-named scratchpad for Tailwind experimentation. Lives at `$TW_HOME/playgrounds/<name>/` and contains exactly `index.html` and `src/main.css`.
+A named scratchpad for Tailwind experimentation. Lives at `$TW_HOME/playgrounds/<name>/` and contains exactly `index.html` and `src/main.css`. The name is stored as-is — it is the folder name on disk.
 _Avoid_: project, template, sample, demo, sketch
 
 **Store**:
@@ -22,7 +22,7 @@ _Avoid_: settings, preferences, profile
 
 ## Constraints
 
-A playground's **name** is a slug matching `^[a-z0-9][a-z0-9-]*$`. Names appear in filenames, in URLs at dev time, and as arguments to every subcommand. Invalid names are rejected, not auto-slugified.
+A playground's **name** is any non-empty, filesystem-safe label. It becomes the directory name under the store. Names with path separators, traversal segments, or other unsafe characters are rejected — never auto-slugified or silently rewritten.
 
 ## Example dialogue
 
