@@ -1,7 +1,7 @@
 {
   "name": "tw",
-  "version": "0.1.0",
-  "description": "Minimal CLI for creating and serving Tailwind CSS playgrounds with HMR.",
+  "version": "0.2.0",
+  "description": "Minimal CLI for creating and serving Tailwind CSS playgrounds with live reload.",
   "type": "module",
   "bin": {
     "tw": "./bin/tw.js"
@@ -14,8 +14,7 @@
   },
   "dependencies": {
     "@clack/prompts": "^1.4.0",
-    "@tailwindcss/vite": "^4.1.0",
-    "tailwindcss": "^4.1.0",
-    "vite": "^6.3.0"
+    "chokidar": "^4.0.0",
+    "ws": "^8.18.0"
   }
 }

@@ -17,16 +17,14 @@ describe('template', () => {
     }
   });
 
-  test('materialize produces expected files with placeholder substitution', () => {
+  test('materialize produces expected index.html with placeholder substitution', () => {
     tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'tw-template-test-'));
     materialize('demo', tempDir);
 
     const expectedHtml = fs.readFileSync(path.join(fixtureRoot, 'index.html'), 'utf8');
-    const expectedCss = fs.readFileSync(path.join(fixtureRoot, 'src', 'main.css'), 'utf8');
     const actualHtml = fs.readFileSync(path.join(tempDir, 'index.html'), 'utf8');
-    const actualCss = fs.readFileSync(path.join(tempDir, 'src', 'main.css'), 'utf8');
 
     assert.equal(actualHtml, expectedHtml);
-    assert.equal(actualCss, expectedCss);
+    assert.equal(fs.existsSync(path.join(tempDir, 'src')), false);
   });
 });

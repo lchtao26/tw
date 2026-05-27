@@ -1,11 +1,11 @@
 # tw
 
-`tw` is a personal CLI for creating and running tiny, throwaway Tailwind CSS experiments. It owns a user-global library of named playgrounds and serves them on demand via a Vite-powered dev loop.
+`tw` is a personal CLI for creating and running tiny, throwaway Tailwind CSS experiments. It owns a user-global library of named playgrounds and serves them on demand with live reload.
 
 ## Language
 
 **Playground**:
-A named scratchpad for Tailwind experimentation. Lives at `$TW_HOME/playgrounds/<name>/` and contains exactly `index.html` and `src/main.css`. The name is stored as-is — it is the folder name on disk.
+A named scratchpad for Tailwind experimentation. Lives at `$TW_HOME/playgrounds/<name>/` and contains a single `index.html` that loads Tailwind from a browser CDN. The name is stored as-is — it is the folder name on disk.
 _Avoid_: project, template, sample, demo, sketch
 
 **Store**:
@@ -32,5 +32,5 @@ A playground's **name** is any non-empty, filesystem-safe label. It becomes the 
 > **dev:** "Can I keep a playground inside this project's repo?"
 > **dev:** "No. The store is deliberately not per-project — that's what makes a playground a *playground* and not a *project artifact*. If you want it committed somewhere, `cp -r $(tw path hover-tricks) ./somewhere/`."
 >
-> **dev:** "Why doesn't `index.html` render when I just open it in a browser?"
-> **dev:** "It's not standalone HTML. Tailwind is compiled by Vite via `@tailwindcss/vite`, not by a CDN script. Use `tw dev hover-tricks` instead of `file://`."
+> **dev:** "Can I just double-click `index.html`?"
+> **dev:** "Yes. Tailwind loads from a CDN script in the file itself. `tw dev hover-tricks` only adds auto-reload on save — use it when you're iterating, not because `file://` is broken."

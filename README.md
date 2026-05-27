@@ -1,6 +1,6 @@
 # tw
 
-A tiny CLI for Tailwind CSS playgrounds. Create a named scratchpad, run `tw dev`, edit HTML/CSS, see changes instantly.
+A tiny CLI for Tailwind CSS playgrounds. Create a named scratchpad, run `tw dev`, edit HTML, see changes on save.
 
 Requires **Node.js 20+**.
 
@@ -20,10 +20,9 @@ tw add demo
 tw dev demo
 ```
 
-Edit these two files while the server runs:
+Edit this file while the server runs:
 
-- `~/.tw/playgrounds/demo/index.html` — markup and Tailwind classes
-- `~/.tw/playgrounds/demo/src/main.css` — `@import "tailwindcss"` and optional `@theme` overrides
+- `~/.tw/playgrounds/demo/index.html` — markup and Tailwind utility classes
 
 Open the playground folder in your editor:
 
@@ -80,9 +79,7 @@ tw dev demo --no-open --no-editor
 ├── config.json
 └── playgrounds/
     └── demo/
-        ├── index.html
-        └── src/
-            └── main.css
+        └── index.html
 ```
 
 Playgrounds are stored globally for your user, not inside whatever project directory you happen to be in. Override the location with `$TW_HOME` if needed.
@@ -103,5 +100,5 @@ Names are trimmed and stored as-is — nothing is auto-renamed. Use quotes when 
 
 ## Notes
 
-- Playgrounds need `tw dev` running. Opening `index.html` directly in a browser won't work — Tailwind is compiled by Vite, not loaded from a CDN script.
+- Playgrounds work standalone: open `index.html` directly in a browser (`file://`) and Tailwind loads from the CDN script in the file. `tw dev` adds auto-reload on save during iteration.
 - `tw dev` with no playgrounds yet prints: `no playgrounds yet — try: tw add <name>`
