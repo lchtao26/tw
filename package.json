@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "@clack/prompts": "^1.4.0",
-    "chokidar": "^4.0.0",
-    "ws": "^8.18.0"
+    "@compodoc/live-server": "^1.2.3"
   }
 }
