@@ -1,6 +1,6 @@
 # tw
 
-`tw` is a personal CLI for creating and running tiny, throwaway Tailwind CSS experiments. It owns a user-global library of named playgrounds and serves them on demand with live reload.
+`tw` is a personal CLI for creating and opening tiny, throwaway Tailwind CSS experiments. It owns a user-global library of named playgrounds and reveals them in the file manager on demand.
 
 ## Language
 
@@ -13,12 +13,16 @@ The directory holding all playgrounds — `$TW_HOME/playgrounds/`. Singular acro
 _Avoid_: workspace, library, registry, collection
 
 **`$TW_HOME`**:
-Environment variable pointing at `tw`'s root data directory. Defaults to `~/.tw`. Holds the store and the config file.
+Environment variable pointing at `tw`'s root data directory. Defaults to `~/.tw`. Holds the store.
 _Avoid_: home, root, data dir
 
-**Config**:
-The single JSON file at `$TW_HOME/config.json` controlling `tw dev`'s default behavior. Two fields: `openBrowserOnDev` and `openEditorOnDev`. Lazily created — defaults apply when the file is absent.
-_Avoid_: settings, preferences, profile
+**Open**:
+The `tw open` command. Picks a playground (if name omitted), then **reveals its folder** in the OS file manager (Finder on macOS, Explorer on Windows, default file manager on Linux). Exits immediately. Folder-only — no browser flag, no opener picker, no dev server, no IDE integration. Preview by double-clicking `index.html` in the revealed folder. Replaces the removed `tw dev` command.
+_Avoid_: dev, serve, launch, editor, browser
+
+**Path**:
+The `tw path` command. Prints a playground's absolute directory path to stdout. For scripting (`cd`, `cp`, …). Complements **Open** — `tw open` is the GUI path, `tw path` is the stdout path. Both kept.
+_Avoid_: location, dir
 
 ## Constraints
 
@@ -33,4 +37,4 @@ A playground's **name** is any non-empty, filesystem-safe label. It becomes the 
 > **dev:** "No. The store is deliberately not per-project — that's what makes a playground a *playground* and not a *project artifact*. If you want it committed somewhere, `cp -r $(tw path hover-tricks) ./somewhere/`."
 >
 > **dev:** "Can I just double-click `index.html`?"
-> **dev:** "Yes. Tailwind loads from a CDN script in the file itself. `tw dev hover-tricks` only adds auto-reload on save — use it when you're iterating, not because `file://` is broken."
+> **dev:** "Yes — run `tw open hover-tricks` to reveal the folder in Finder, then open `index.html`. Tailwind loads from a CDN script in the file itself; no server required."

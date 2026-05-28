@@ -1,104 +1,65 @@
 # tw
 
-A tiny CLI for Tailwind CSS playgrounds. Create a named scratchpad, run `tw dev`, edit HTML, see changes on save.
+A tiny CLI for Tailwind CSS playgrounds. Create a named scratchpad, run `tw open`, edit `index.html`, preview in your browser.
 
-Requires **Node.js 20+**.
+## Install
+
+```bash
+npm install -g tw
+```
+
+Requires Node.js 20+.
 
 ## Quick start
 
-```bash
-git clone https://github.com/lchtao26/tw.git
-cd tw
-npm install
-npm link
-```
-
-Create a playground and start the dev server:
+Create a playground and reveal it in your file manager:
 
 ```bash
 tw add demo
-tw dev demo
+tw open demo
 ```
 
-Edit this file while the server runs:
-
-- `~/.tw/playgrounds/demo/index.html` — markup and Tailwind utility classes
-
-Open the playground folder in your editor:
-
-```bash
-cursor $(tw path demo)    # or: code, subl, etc.
-```
+Edit the HTML and open `index.html` in your browser — Tailwind loads from a CDN script in the file.
 
 ## Commands
 
-| Command | What it does |
-|---|---|
+| Command | Description |
+|---------|-------------|
 | `tw add [name]` | Create a playground. Prompts for a name if omitted. |
-| `tw dev [name]` | Serve a playground with live reload. Opens a picker if omitted. |
-| `tw list` | List all playgrounds. |
-| `tw path [name]` | Print the absolute path to a playground. |
-| `tw rm [name]` | Delete a playground. Prompts to confirm. |
-| `tw config` | Configure defaults (see below). |
+| `tw open [name]` | Reveal a playground folder in the file manager. Opens a picker if omitted. |
+| `tw path [name]` | Print a playground's absolute path. Opens a picker if omitted. |
+| `tw list` | List playground names. |
+| `tw rm [name]` | Remove a playground. Opens a picker if omitted. |
 
-**Dev flags**
+`tw rm` flags:
 
-- `--no-open` — don't open the browser
-- `--no-editor` — don't launch an editor (when configured)
-
-**Remove flags**
-
-- `-y` — skip the delete confirmation
-
-## Config
-
-Optional. Run `tw config` to set defaults interactively, or set values directly:
-
-```bash
-tw config openBrowserOnDev false
-tw config openEditorOnDev cursor
-```
-
-| Key | Default | Meaning |
-|---|---|---|
-| `openBrowserOnDev` | `true` | Open the browser when you run `tw dev` |
-| `openEditorOnDev` | `null` | Shell command to open the playground folder (e.g. `cursor`, `code`) |
-
-Config lives at `~/.tw/config.json`. The file is created only after you change something.
-
-Override config for a single run:
-
-```bash
-tw dev demo --no-open --no-editor
-```
+- `-y`, `--yes` — skip confirmation
 
 ## Where things live
 
 ```
 ~/.tw/
-├── config.json
 └── playgrounds/
     └── demo/
         └── index.html
 ```
 
-Playgrounds are stored globally for your user, not inside whatever project directory you happen to be in. Override the location with `$TW_HOME` if needed.
+Override the root with `TW_HOME`:
+
+```bash
+export TW_HOME=/path/to/my-tw
+```
 
 ## Playground names
 
-Use any readable label: spaces, mixed case, and unicode are fine. Examples: `demo`, `Hover Tricks`, `网格实验`.
+Names are used as folder names under `~/.tw/playgrounds/`. They must be non-empty and filesystem-safe. These are rejected:
 
-These are rejected:
-
-- empty names (including whitespace-only)
-- `.` and `..`
-- path separators (`/` `\`) and Windows-forbidden characters (`< > : " | ? *`)
-- control characters
+- `.`, `..`, names with `/` or `\`
 - reserved Windows device names (`CON`, `NUL`, `COM1`, …)
 
-Names are trimmed and stored as-is — nothing is auto-renamed. Use quotes when a name contains spaces: `tw add "Hover Tricks"`.
+Names with spaces are allowed — quote them on the shell: `tw open "Hover Tricks"`.
 
 ## Notes
 
-- Playgrounds work standalone: open `index.html` directly in a browser (`file://`) and Tailwind loads from the CDN script in the file. `tw dev` adds auto-reload on save during iteration.
-- `tw dev` with no playgrounds yet prints: `no playgrounds yet — try: tw add <name>`
+- Playgrounds work standalone: open `index.html` directly in a browser (`file://`) and Tailwind loads from the CDN script in the file.
+- `tw open` with no playgrounds yet prints: `no playgrounds yet — try: tw add <name>`

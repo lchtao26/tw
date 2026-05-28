@@ -1,7 +1,7 @@
 {
   "name": "tw",
   "version": "0.2.0",
-  "description": "Minimal CLI for creating and serving Tailwind CSS playgrounds with live reload.",
+  "description": "Minimal CLI for creating and opening Tailwind CSS playgrounds.",
   "type": "module",
   "bin": {
     "tw": "./bin/tw.js"
@@ -13,7 +13,6 @@
     "test": "node --test test/*.test.js"
   },
   "dependencies": {
-    "@clack/prompts": "^1.4.0",
-    "@compodoc/live-server": "^1.2.3"
+    "@clack/prompts": "^1.4.0"
   }
 }
