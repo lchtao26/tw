@@ -1,14 +1,17 @@
 # tw
 
-A tiny CLI for Tailwind CSS playgrounds. Create a named scratchpad, run `tw open`, edit `index.html`, preview in your browser.
+A tiny CLI for Tailwind CSS playgrounds — named scratchpads in a user-global store.
 
 ## Install
 
 ```bash
-npm install -g tw
+git clone https://github.com/lchtao26/tw.git
+cd tw
+npm install
+npm link
 ```
 
-Requires Node.js 20+.
+This installs dependencies and links the `tw` CLI on your PATH. The package is not published to npm.
 
 ## Quick start
 
@@ -19,7 +22,9 @@ tw add demo
 tw open demo
 ```
 
-Edit the HTML and open `index.html` in your browser — Tailwind loads from a CDN script in the file.
+Edit `index.html` and open it in your browser — Tailwind loads from a CDN script in the file.
+
+Playgrounds live in `~/.tw/playgrounds/<name>/`. Set `TW_HOME` to override.
 
 ## Commands
 
@@ -30,36 +35,3 @@ Edit the HTML and open `index.html` in your browser — Tailwind loads from a CD
 | `tw path [name]` | Print a playground's absolute path. Opens a picker if omitted. |
 | `tw list` | List playground names. |
 | `tw rm [name]` | Remove a playground. Opens a picker if omitted. |
-
-`tw rm` flags:
-
-- `-y`, `--yes` — skip confirmation
-
-## Where things live
-
-```
-~/.tw/
-└── playgrounds/
-    └── demo/
-        └── index.html
-```
-
-Override the root with `TW_HOME`:
-
-```bash
-export TW_HOME=/path/to/my-tw
-```
-
-## Playground names
-
-Names are used as folder names under `~/.tw/playgrounds/`. They must be non-empty and filesystem-safe. These are rejected:
-
-- `.`, `..`, names with `/` or `\`
-- reserved Windows device names (`CON`, `NUL`, `COM1`, …)
-
-Names with spaces are allowed — quote them on the shell: `tw open "Hover Tricks"`.
-
-## Notes
-
-- Playgrounds work standalone: open `index.html` directly in a browser (`file://`) and Tailwind loads from the CDN script in the file.
-- `tw open` with no playgrounds yet prints: `no playgrounds yet — try: tw add <name>`
