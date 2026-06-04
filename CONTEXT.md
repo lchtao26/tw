@@ -25,11 +25,11 @@ The `tw open` command. Picks a playground (if name omitted), then **reveals its 
 _Avoid_: dev, serve, launch
 
 **Dev**:
-The `tw dev` command. Picks a playground (if name omitted), starts Vite + Tailwind with HMR over that playground's root, prints the served URL, and blocks until Ctrl-C. Preview path for playgrounds — required because Tailwind is not compiled for `file://`. Binds localhost only — not LAN-accessible. While running in an interactive terminal, on-demand **Dev shortcuts** open the browser (`o`), reveal the folder (`O`), or launch an editor (`e` / `E`) — no auto-open on start. Startup prints a titled **Shortcuts** list when stdin is a TTY. Standalone **Open** still works without a running server.
+The `tw dev` command. Picks a playground (if name omitted), starts Vite + Tailwind with HMR over that playground's root, prints the served URL, and blocks until Ctrl-C stops it. Preview path for playgrounds — required because Tailwind is not compiled for `file://`. Binds localhost only — not LAN-accessible. While running in an interactive terminal, on-demand **Dev shortcuts** open the browser (`o`), reveal the folder (`O`), or launch an editor (`e` / `E`) — no auto-open on start. Startup prints a titled **Shortcuts** list when stdin is a TTY. Standalone **Open** still works without a running server.
 _Avoid_: open, serve, start
 
 **Dev shortcuts**:
-Keystrokes available while **Dev** is running. `o` opens the served URL in the default browser; `O` reveals the playground folder ("reveal in folder" — same outcome as **Open**). `e` prompts for an editor command with a blank line (no pre-fill from **Config**; empty input or Ctrl-C cancels silently) and saves the result to **Config**; `E` opens via the saved editor from **Config** — if none yet, prints a one-line hint to press `e` first. Each press prints a one-line acknowledgment; spawn failures warn without stopping **Dev**.
+Keystrokes available while **Dev** is running. `o` opens the served URL in the default browser; `O` reveals the playground folder ("reveal in folder" — same outcome as **Open**). `e` prompts for an editor command with a blank line (no pre-fill from **Config**; empty input or Ctrl-C cancels the prompt silently) and saves the result to **Config**; `E` opens via the saved editor from **Config** — if none yet, prints a one-line hint to press `e` first. Ctrl-C outside a prompt stops **Dev**. Each action press prints a one-line acknowledgment; spawn failures warn without stopping **Dev**.
 _Avoid_: hotkeys, bindings
 
 **Path**:
