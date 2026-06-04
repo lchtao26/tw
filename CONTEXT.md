@@ -5,7 +5,7 @@
 ## Language
 
 **Playground**:
-A named scratchpad for Tailwind experimentation. Lives at `$TW_HOME/playgrounds/<name>/` as a two-file minimum: `index.html` plus `src/main.css` with `@import "tailwindcss"`. New playgrounds also ship **bundled fonts** — Inter Variable on the default sans stack and Lexend Variable on the display stack — wired through `src/main.css`; font files live with `tw`, not in the playground folder. Tailwind is compiled by `tw`'s bundled Vite toolchain — not a browser CDN. Preview requires `tw dev`; `file://` does not work. The name is stored as-is — it is the folder name on disk.
+A named scratchpad for Tailwind experimentation. Lives at `$TW_HOME/playgrounds/<name>/` as a two-file minimum: `index.html` plus `src/main.css` with `@import "tailwindcss"`. New playgrounds also ship **bundled fonts** and **bundled icons** — wired through `src/main.css`; assets and icon data live with `tw`, not in the playground folder. Default fonts: Inter Variable on the sans stack, Lexend Variable on the display stack. Tailwind is compiled by `tw`'s bundled Vite toolchain — not a browser CDN. Preview requires `tw dev`; `file://` does not work. The name is stored as-is — it is the folder name on disk.
 _Avoid_: project, template, sample, demo, sketch
 
 **Store**:
@@ -40,11 +40,19 @@ _Avoid_: location, dir
 Variable faces shipped with `tw` and wired into new playgrounds' `src/main.css`. Playgrounds declare them; **Dev** resolves `@fontsource-variable/*` imports from `tw`'s own dependencies — playgrounds stay dependency-free. The default template sets Inter Variable on `--font-sans` (`font-sans`) and Lexend Variable on `--font-display` (`font-display`). Swapping or adding faces works when that package is also shipped with `tw`; static `@fontsource/*` imports are out of scope. Users override or remove bundled fonts by editing `main.css` like any other scratchpad content.
 _Avoid_: Fontsource (implementation name), webfont package, npm dep
 
+**Bundled icons**:
+Iconify for Tailwind, shipped with `tw`. New playgrounds enable the plugin in `src/main.css`; **Dev** resolves the plugin and full open-source icon catalogue from `tw`'s dependencies — playgrounds stay dependency-free. Icons are written in HTML with **dynamic icon classes** only (e.g. `icon-[lucide--heart]`). Only icons actually used in a playground's HTML get CSS; the catalogue is breadth, not per-playground weight. Users remove the plugin line or stop using icon classes like any other scratchpad edit.
+_Avoid_: Iconify (product name in user docs), web component, npm dep per playground, clean selector (`mdi-light--home` without `icon-[…]`)
+
+**Dynamic icon class**:
+Tailwind utility shaped `icon-[{prefix}--{name}]` on a host element (commonly `<span>`). `{prefix}` and `{name}` match an Iconify set entry (e.g. `lucide--heart`). Monotone icons follow text color; colored sets render as-is. Copy from Iconify's "CSS → Tailwind CSS" snippet. Not the shorter **clean selector** form (`{prefix}--{name}` plus `iconify`) — that requires a fixed prefix list and is out of scope for the default template.
+_Avoid_: icon class, icon utility, `iconify-icon`
+
 ## Constraints
 
 A playground's **name** is any non-empty, filesystem-safe label. It becomes the directory name under the store. Names with path separators, traversal segments, or other unsafe characters are rejected — never auto-slugified or silently rewritten.
 
-Legacy playgrounds created under the CDN layout are not detected or migrated. `tw dev` starts Vite over whatever is on disk. Template changes (e.g. adding **bundled fonts**) apply only to new playgrounds from `tw add` — no backfill for existing ones.
+Legacy playgrounds created under the CDN layout are not detected or migrated. `tw dev` starts Vite over whatever is on disk. Template changes (e.g. **bundled fonts**, **bundled icons**) apply only to new playgrounds from `tw add` — no backfill for existing ones.
 
 ## Example dialogue
 

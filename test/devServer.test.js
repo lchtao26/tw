@@ -53,6 +53,20 @@ describe('devServer', () => {
     assert.equal(body.subarray(0, 4).toString(), 'wOF2');
   });
 
+  test('createDevServerOptions compiles dynamic icon classes from bundled Iconify', async () => {
+    const fixtureRoot = path.resolve('test/fixtures/demo-playground');
+
+    server = await createServer(createDevServerOptions(fixtureRoot));
+    await server.listen();
+
+    const base = server.resolvedUrls?.local[0];
+    assert.ok(base);
+
+    const css = await (await fetch(`${base}src/main.css`)).text();
+
+    assert.match(css, /\.icon-\[lucide--hand\]|lucide--hand/);
+  });
+
   test('bundled font @fs URLs are blocked without server.fs.allow', async () => {
     tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'tw-dev-server-test-'));
     materialize('fonts', tempDir);

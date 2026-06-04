@@ -24,6 +24,8 @@ tw dev demo
 
 Open the URL printed in your terminal. Edit `index.html` or `src/main.css` — changes hot-reload via Vite.
 
+New playgrounds include bundled fonts and [Iconify](https://iconify.design/) icons. Use dynamic Tailwind classes in HTML, e.g. `<span class="icon-[lucide--heart]"></span>` — copy snippets from Iconify (“CSS → Tailwind CSS”). Icon data ships with `tw`, not per playground.
+
 Playgrounds live in `~/.tw/playgrounds/<name>/`. Set `TW_HOME` to override.
 
 ## Commands
