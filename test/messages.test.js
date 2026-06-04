@@ -20,7 +20,10 @@ describe('messages', () => {
     const home = os.homedir();
     const playground = path.join(home, '.tw', 'playgrounds', 'demo');
 
-    assert.equal(formatDisplayPath(playground), path.join('~', '.tw', 'playgrounds', 'demo'));
+    assert.equal(
+      formatDisplayPath(playground),
+      path.join('~', '.tw', 'playgrounds', 'demo'),
+    );
   });
 
   test('formatDisplayPath keeps absolute paths outside the home directory', () => {
@@ -31,12 +34,18 @@ describe('messages', () => {
 
   test('formatPlaygroundDevCommand quotes names with spaces', () => {
     assert.equal(formatPlaygroundDevCommand('demo'), 'tw dev demo');
-    assert.equal(formatPlaygroundDevCommand('Hover Tricks'), 'tw dev "Hover Tricks"');
+    assert.equal(
+      formatPlaygroundDevCommand('Hover Tricks'),
+      'tw dev "Hover Tricks"',
+    );
   });
 
   test('formatPlaygroundOpenCommand quotes names with spaces', () => {
     assert.equal(formatPlaygroundOpenCommand('demo'), 'tw open demo');
-    assert.equal(formatPlaygroundOpenCommand('Hover Tricks'), 'tw open "Hover Tricks"');
+    assert.equal(
+      formatPlaygroundOpenCommand('Hover Tricks'),
+      'tw open "Hover Tricks"',
+    );
   });
 
   test('formatAddSuccess prints the friendly add summary', () => {
@@ -65,14 +74,20 @@ describe('messages', () => {
   });
 
   test('formatDevOpened prints the served URL', () => {
-    assert.equal(formatDevOpened('http://127.0.0.1:5173/'), '  → opened http://127.0.0.1:5173/');
+    assert.equal(
+      formatDevOpened('http://127.0.0.1:5173/'),
+      '  → opened http://127.0.0.1:5173/',
+    );
   });
 
   test('formatDevRevealed shortens paths under the home directory', () => {
     const home = os.homedir();
     const root = path.join(home, '.tw', 'playgrounds', 'demo');
 
-    assert.equal(formatDevRevealed(root), `  → revealed ${path.join('~', '.tw', 'playgrounds', 'demo')}`);
+    assert.equal(
+      formatDevRevealed(root),
+      `  → revealed ${path.join('~', '.tw', 'playgrounds', 'demo')}`,
+    );
   });
 
   test('formatDevLaunched prints editor and shortened folder path', () => {

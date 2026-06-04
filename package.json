@@ -10,12 +10,31 @@
     "node": ">=20"
   },
   "scripts": {
-    "test": "node --test test/*.test.js"
+    "test": "node --test test/*.test.js",
+    "lint": "oxlint bin lib test",
+    "format": "prettier --write \"bin/**/*.js\" \"lib/**/*.js\" \"test/**/*.js\" \"templates/**/*.{html,css}\"",
+    "format:check": "prettier --check \"bin/**/*.js\" \"lib/**/*.js\" \"test/**/*.js\" \"templates/**/*.{html,css}\"",
+    "knip": "knip",
+    "check": "npm run lint && npm run format:check && npm run test",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "bin/**/*.js": ["oxlint", "prettier --write"],
+    "lib/**/*.js": ["oxlint", "prettier --write"],
+    "test/**/*.js": ["oxlint", "prettier --write"],
+    "templates/**/*.{html,css}": ["prettier --write"]
   },
   "dependencies": {
     "@clack/prompts": "^1.4.0",
     "@tailwindcss/vite": "^4.1.11",
     "tailwindcss": "^4.1.11",
     "vite": "^6.3.5"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "knip": "^6.15.0",
+    "lint-staged": "^17.0.7",
+    "oxlint": "^1.68.0",
+    "prettier": "^3.8.3"
   }
 }

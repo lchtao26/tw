@@ -1,4 +1,5 @@
 node_modules/
+tmp-proj/
 *.log
 .DS_Store
 .env
