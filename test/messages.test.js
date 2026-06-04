@@ -59,6 +59,7 @@ describe('messages', () => {
         '  O  reveal in folder',
         '  e  open in editor',
         '  E  open in last editor',
+        '',
       ].join('\n'),
     );
   });
