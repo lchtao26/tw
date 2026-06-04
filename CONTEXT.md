@@ -52,7 +52,7 @@ Legacy playgrounds created under the CDN layout are not detected or migrated. `t
 > **dev (Wednesday):** "In the **store**. `~/.tw/playgrounds/hover-tricks/`. The store is user-global — it doesn't matter what CWD you ran `tw add` from."
 >
 > **dev:** "Can I keep a playground inside this project's repo?"
-> **dev:** "No. The store is deliberately not per-project — that's what makes a playground a *playground* and not a *project artifact*. If you want it committed somewhere, `cp -r $(tw path hover-tricks) ./somewhere/`."
+> **dev:** "No. The store is deliberately not per-project — that's what makes a playground a _playground_ and not a _project artifact_. If you want it committed somewhere, `cp -r $(tw path hover-tricks) ./somewhere/`."
 >
 > **dev:** "Can I just double-click `index.html`?"
 > **dev:** "No — Tailwind compiles through Vite. Run `tw dev hover-tricks` to preview with HMR. Use `tw open hover-tricks` if you just want the folder in Finder."

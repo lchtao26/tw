@@ -4,6 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, test } from 'node:test';
 
+import { TwError } from '../lib/errors.js';
 import {
   createPlayground,
   listPlaygrounds,
@@ -14,7 +15,6 @@ import {
   twHome,
   validateName,
 } from '../lib/store.js';
-import { TwError } from '../lib/errors.js';
 
 describe('store', () => {
   let tempHome;

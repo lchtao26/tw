@@ -28,11 +28,11 @@ Playgrounds live in `~/.tw/playgrounds/<name>/`. Set `TW_HOME` to override.
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `tw add [name]` | Create a playground. Prompts for a name if omitted. |
-| `tw dev [name]` | Start Vite + Tailwind HMR for a playground. Prompts if omitted. |
+| Command          | Description                                                                |
+| ---------------- | -------------------------------------------------------------------------- |
+| `tw add [name]`  | Create a playground. Prompts for a name if omitted.                        |
+| `tw dev [name]`  | Start Vite + Tailwind HMR for a playground. Prompts if omitted.            |
 | `tw open [name]` | Reveal a playground folder in the file manager. Opens a picker if omitted. |
-| `tw path [name]` | Print a playground's absolute path. Opens a picker if omitted. |
-| `tw list` | List playground names. |
-| `tw rm [name]` | Remove a playground. Opens a picker if omitted. |
+| `tw path [name]` | Print a playground's absolute path. Opens a picker if omitted.             |
+| `tw list`        | List playground names.                                                     |
+| `tw rm [name]`   | Remove a playground. Opens a picker if omitted.                            |

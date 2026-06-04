@@ -12,17 +12,26 @@
   "scripts": {
     "test": "node --test test/*.test.js",
     "lint": "oxlint bin lib test",
-    "format": "prettier --write \"bin/**/*.js\" \"lib/**/*.js\" \"test/**/*.js\" \"templates/**/*.{html,css}\"",
-    "format:check": "prettier --check \"bin/**/*.js\" \"lib/**/*.js\" \"test/**/*.js\" \"templates/**/*.{html,css}\"",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
     "knip": "knip",
     "check": "npm run lint && npm run format:check && npm run test",
     "prepare": "husky"
   },
   "lint-staged": {
-    "bin/**/*.js": ["oxlint", "prettier --write"],
-    "lib/**/*.js": ["oxlint", "prettier --write"],
-    "test/**/*.js": ["oxlint", "prettier --write"],
-    "templates/**/*.{html,css}": ["prettier --write"]
+    "bin/**/*.js": [
+      "oxlint",
+      "oxfmt --write"
+    ],
+    "lib/**/*.js": [
+      "oxlint",
+      "oxfmt --write"
+    ],
+    "test/**/*.js": [
+      "oxlint",
+      "oxfmt --write"
+    ],
+    "**/*.{css,html,json,jsonc,md,yaml,yml}": "oxfmt --write"
   },
   "dependencies": {
     "@clack/prompts": "^1.4.0",
@@ -36,7 +45,7 @@
     "husky": "^9.1.7",
     "knip": "^6.15.0",
     "lint-staged": "^17.0.7",
-    "oxlint": "^1.68.0",
-    "prettier": "^3.8.3"
+    "oxfmt": "^0.53.0",
+    "oxlint": "^1.68.0"
   }
 }
