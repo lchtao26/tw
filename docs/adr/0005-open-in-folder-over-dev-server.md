@@ -1,5 +1,7 @@
 # `tw open` (reveal in folder) over a live-reload dev server
 
+> _Partially superseded by [ADR-0006](./0006-vite-dev-server-minimal.md). `tw dev` is back (Vite + Tailwind HMR). `tw open` remains. Config and live-server removal below stay in effect._
+
 ADR-0003 and ADR-0004 established that playgrounds compile Tailwind via the `@tailwindcss/browser@4` CDN and work standalone over `file://`. `tw dev` existed only to add auto-reload during layout iteration — a long-running HTTP server (`@compodoc/live-server`), browser auto-open, optional IDE launch, and a `$TW_HOME/config.json` for defaults.
 
 We reverse the server half of that story. `tw dev` is removed. `tw open [name]` reveals the playground folder in the OS file manager and exits. Preview is a double-click on `index.html`. `tw config` is removed — there are no per-user open defaults left to configure. `tw path` stays for scripting.

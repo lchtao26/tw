@@ -1,5 +1,7 @@
 # Tailwind via `@tailwindcss/browser@4` CDN and a hand-rolled live-reload server
 
+> _Superseded by [ADR-0006](./0006-vite-dev-server-minimal.md). Playgrounds again use Vite + `@tailwindcss/vite`; the CDN layout is no longer generated._
+
 ADR-0002 chose Vite + `@tailwindcss/vite` so playgrounds matched real Tailwind-in-a-Vite-app fidelity: source-file scanning, `@theme` in CSS, sub-100ms HMR, no FOUC. In practice, `tw` is used for utility-class doodling against static HTML — not for prototyping `@theme`, plugins, or paste-into-Next.js fragments. That fidelity no longer pays for the ~40MB install and the resolver bugs that come from serving a depless playground root through Vite.
 
 We reverse ADR-0002. A playground is a single `index.html` with `<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>` in `<head>`. `tw dev` runs a tiny hand-rolled HTTP server (`node:http`) with live reload via `chokidar` + `ws` — not Vite. The user never installs toolchain deps per playground; `chokidar` and `ws` ship as normal `tw` dependencies the same way `@clack/prompts` does today.

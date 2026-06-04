@@ -6,6 +6,7 @@ import { describe, test } from 'node:test';
 import {
   formatAddSuccess,
   formatDisplayPath,
+  formatPlaygroundDevCommand,
   formatPlaygroundOpenCommand,
 } from '../lib/messages.js';
 
@@ -23,6 +24,11 @@ describe('messages', () => {
     assert.equal(formatDisplayPath(outside), outside);
   });
 
+  test('formatPlaygroundDevCommand quotes names with spaces', () => {
+    assert.equal(formatPlaygroundDevCommand('demo'), 'tw dev demo');
+    assert.equal(formatPlaygroundDevCommand('Hover Tricks'), 'tw dev "Hover Tricks"');
+  });
+
   test('formatPlaygroundOpenCommand quotes names with spaces', () => {
     assert.equal(formatPlaygroundOpenCommand('demo'), 'tw open demo');
     assert.equal(formatPlaygroundOpenCommand('Hover Tricks'), 'tw open "Hover Tricks"');
@@ -35,6 +41,6 @@ describe('messages', () => {
 
     assert.match(message, /^Playground "demo" is ready to go\.\n\n/);
     assert.match(message, /\n  path:  ~/);
-    assert.match(message, /\n  next:  tw open demo$/);
+    assert.match(message, /\n  next:  tw dev demo$/);
   });
 });

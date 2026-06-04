@@ -25,6 +25,10 @@ describe('template', () => {
     const actualHtml = fs.readFileSync(path.join(tempDir, 'index.html'), 'utf8');
 
     assert.equal(actualHtml, expectedHtml);
-    assert.equal(fs.existsSync(path.join(tempDir, 'src')), false);
+
+    const expectedCss = fs.readFileSync(path.join(fixtureRoot, 'src', 'main.css'), 'utf8');
+    const actualCss = fs.readFileSync(path.join(tempDir, 'src', 'main.css'), 'utf8');
+
+    assert.equal(actualCss, expectedCss);
   });
 });

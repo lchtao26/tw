@@ -15,14 +15,14 @@ This installs dependencies and links the `tw` CLI on your PATH. The package is n
 
 ## Quick start
 
-Create a playground and reveal it in your file manager:
+Create a playground and start the dev server:
 
 ```bash
 tw add demo
-tw open demo
+tw dev demo
 ```
 
-Edit `index.html` and open it in your browser — Tailwind loads from a CDN script in the file.
+Open the URL printed in your terminal. Edit `index.html` or `src/main.css` — changes hot-reload via Vite.
 
 Playgrounds live in `~/.tw/playgrounds/<name>/`. Set `TW_HOME` to override.
 
@@ -31,6 +31,7 @@ Playgrounds live in `~/.tw/playgrounds/<name>/`. Set `TW_HOME` to override.
 | Command | Description |
 |---------|-------------|
 | `tw add [name]` | Create a playground. Prompts for a name if omitted. |
+| `tw dev [name]` | Start Vite + Tailwind HMR for a playground. Prompts if omitted. |
 | `tw open [name]` | Reveal a playground folder in the file manager. Opens a picker if omitted. |
 | `tw path [name]` | Print a playground's absolute path. Opens a picker if omitted. |
 | `tw list` | List playground names. |

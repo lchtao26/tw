@@ -76,7 +76,7 @@ describe('store', () => {
 
     assert.equal(playgroundExists('demo'), true);
     assert.equal(fs.existsSync(path.join(playgroundPath('demo'), 'index.html')), true);
-    assert.equal(fs.existsSync(path.join(playgroundPath('demo'), 'src')), false);
+    assert.equal(fs.existsSync(path.join(playgroundPath('demo'), 'src', 'main.css')), true);
 
     assert.throws(() => createPlayground('  demo  '), TwError);
   });
