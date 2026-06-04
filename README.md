@@ -22,9 +22,7 @@ tw add demo
 tw dev demo
 ```
 
-Open the URL printed in your terminal, or press `o` while the server is running. Edit `index.html` or `src/main.css` — changes hot-reload via Vite.
-
-When running in a terminal, `tw dev` shows shortcuts: `o` opens the browser, `O` reveals the playground folder.
+Open the URL printed in your terminal. Edit `index.html` or `src/main.css` — changes hot-reload via Vite.
 
 Playgrounds live in `~/.tw/playgrounds/<name>/`. Set `TW_HOME` to override.
 
@@ -33,7 +31,7 @@ Playgrounds live in `~/.tw/playgrounds/<name>/`. Set `TW_HOME` to override.
 | Command | Description |
 |---------|-------------|
 | `tw add [name]` | Create a playground. Prompts for a name if omitted. |
-| `tw dev [name]` | Start Vite + Tailwind HMR for a playground. Prompts if omitted. In a TTY, `o` opens browser, `O` reveals folder. |
+| `tw dev [name]` | Start Vite + Tailwind HMR for a playground. Prompts if omitted. |
 | `tw open [name]` | Reveal a playground folder in the file manager. Opens a picker if omitted. |
 | `tw path [name]` | Print a playground's absolute path. Opens a picker if omitted. |
 | `tw list` | List playground names. |

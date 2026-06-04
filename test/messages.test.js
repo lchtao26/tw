@@ -5,6 +5,8 @@ import { describe, test } from 'node:test';
 
 import {
   formatAddSuccess,
+  formatDevLaunched,
+  formatDevNoEditorYet,
   formatDevOpened,
   formatDevRevealed,
   formatDevShortcutsList,
@@ -55,6 +57,8 @@ describe('messages', () => {
         'Shortcuts',
         '  o  open in browser',
         '  O  reveal in folder',
+        '  e  open in editor',
+        '  E  open in last editor',
       ].join('\n'),
     );
   });
@@ -68,5 +72,19 @@ describe('messages', () => {
     const root = path.join(home, '.tw', 'playgrounds', 'demo');
 
     assert.equal(formatDevRevealed(root), `  → revealed ${path.join('~', '.tw', 'playgrounds', 'demo')}`);
+  });
+
+  test('formatDevLaunched prints editor and shortened folder path', () => {
+    const home = os.homedir();
+    const root = path.join(home, '.tw', 'playgrounds', 'demo');
+
+    assert.equal(
+      formatDevLaunched('cursor', root),
+      `  → launched cursor → ${path.join('~', '.tw', 'playgrounds', 'demo')}`,
+    );
+  });
+
+  test('formatDevNoEditorYet prints the hint to press e first', () => {
+    assert.equal(formatDevNoEditorYet(), '  → no editor yet — press e first');
   });
 });

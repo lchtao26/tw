@@ -13,20 +13,24 @@ The directory holding all playgrounds — `$TW_HOME/playgrounds/`. Singular acro
 _Avoid_: workspace, library, registry, collection
 
 **`$TW_HOME`**:
-Environment variable pointing at `tw`'s root data directory. Defaults to `~/.tw`. Holds the store.
+Environment variable pointing at `tw`'s root data directory. Defaults to `~/.tw`. Holds the store and, when set, a minimal **Config** file for the user's editor preference.
 _Avoid_: home, root, data dir
+
+**Config**:
+Optional `$TW_HOME/config.json` with a single `editor` key — the command used to open a playground folder (e.g. `"cursor"`). Created lazily when the user saves an editor via **Dev shortcuts**. No `tw config` command; not used for browser or other settings.
+_Avoid_: settings, preferences, config.json
 
 **Open**:
 The `tw open` command. Picks a playground (if name omitted), then **reveals its folder** in the OS file manager (Finder on macOS, Explorer on Windows, default file manager on Linux). Exits immediately. Folder-only — no browser, no dev server, no IDE integration. Complements **Dev** when you want the files visible without starting Vite.
 _Avoid_: dev, serve, launch
 
 **Dev**:
-The `tw dev` command. Picks a playground (if name omitted), starts Vite + Tailwind with HMR over that playground's root, prints the served URL, and blocks until Ctrl-C. Preview path for playgrounds — required because Tailwind is not compiled for `file://`. Binds localhost only — not LAN-accessible. While running in an interactive terminal, on-demand **Dev shortcuts** open the browser (`o`) or reveal the folder (`O`) — no auto-open on start. Startup prints a titled **Shortcuts** list when stdin is a TTY. Standalone **Open** still works without a running server.
+The `tw dev` command. Picks a playground (if name omitted), starts Vite + Tailwind with HMR over that playground's root, prints the served URL, and blocks until Ctrl-C. Preview path for playgrounds — required because Tailwind is not compiled for `file://`. Binds localhost only — not LAN-accessible. While running in an interactive terminal, on-demand **Dev shortcuts** open the browser (`o`), reveal the folder (`O`), or launch an editor (`e` / `E`) — no auto-open on start. Startup prints a titled **Shortcuts** list when stdin is a TTY. Standalone **Open** still works without a running server.
 _Avoid_: open, serve, start
 
 **Dev shortcuts**:
-Keystrokes available while **Dev** is running. `o` opens the served URL in the default browser; `O` reveals the playground folder in the file manager ("reveal in folder" — same outcome as **Open**). Each press prints a one-line acknowledgment. Opt-in per press — not configured, not persisted.
-_Avoid_: hotkeys, bindings, config
+Keystrokes available while **Dev** is running. `o` opens the served URL in the default browser; `O` reveals the playground folder ("reveal in folder" — same outcome as **Open**). `e` prompts for an editor command with a blank line (no pre-fill from **Config**; empty input or Ctrl-C cancels silently) and saves the result to **Config**; `E` opens via the saved editor from **Config** — if none yet, prints a one-line hint to press `e` first. Each press prints a one-line acknowledgment; spawn failures warn without stopping **Dev**.
+_Avoid_: hotkeys, bindings
 
 **Path**:
 The `tw path` command. Prints a playground's absolute directory path to stdout. For scripting (`cd`, `cp`, …). Complements **Open** — `tw open` is the GUI path, `tw path` is the stdout path. Both kept.
