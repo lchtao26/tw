@@ -8,4 +8,5 @@ We extend that pattern to web fonts. New playgrounds ship `@import '@fontsource-
 
 - `tw`'s install grows slightly (`@fontsource-variable/inter`, `@fontsource-variable/lexend`). Playgrounds stay two-file and depless.
 - Swapping to another variable face in `main.css` works only when that package is also shipped with `tw`.
+- **Dev** must allow `@fontsource-variable/*` on `server.fs.allow` — font CSS resolves to woff2 files under `tw`'s `node_modules` via `@fs` URLs outside the playground root.
 - Users who want the old minimal CSS can delete the import and `@theme` block, or recreate the playground.
