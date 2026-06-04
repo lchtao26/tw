@@ -5,7 +5,7 @@
 ## Language
 
 **Playground**:
-A named scratchpad for Tailwind experimentation. Lives at `$TW_HOME/playgrounds/<name>/` as a two-file minimum: `index.html` plus `src/main.css` with `@import "tailwindcss"`. New playgrounds also ship a **bundled font** — Inter Variable as the default sans stack — wired through `src/main.css`; the font files live with `tw`, not in the playground folder. Tailwind is compiled by `tw`'s bundled Vite toolchain — not a browser CDN. Preview requires `tw dev`; `file://` does not work. The name is stored as-is — it is the folder name on disk.
+A named scratchpad for Tailwind experimentation. Lives at `$TW_HOME/playgrounds/<name>/` as a two-file minimum: `index.html` plus `src/main.css` with `@import "tailwindcss"`. New playgrounds also ship **bundled fonts** — Inter Variable on the default sans stack and Lexend Variable on the display stack — wired through `src/main.css`; font files live with `tw`, not in the playground folder. Tailwind is compiled by `tw`'s bundled Vite toolchain — not a browser CDN. Preview requires `tw dev`; `file://` does not work. The name is stored as-is — it is the folder name on disk.
 _Avoid_: project, template, sample, demo, sketch
 
 **Store**:
@@ -36,15 +36,15 @@ _Avoid_: hotkeys, bindings
 The `tw path` command. Prints a playground's absolute directory path to stdout. For scripting (`cd`, `cp`, …). Complements **Open** — `tw open` is the GUI path, `tw path` is the stdout path. Both kept.
 _Avoid_: location, dir
 
-**Bundled font**:
-The default sans-serif face (Inter Variable) included in every new playground's `src/main.css`. Playgrounds declare it; **Dev** resolves `@fontsource-variable/*` imports from `tw`'s own dependencies — playgrounds stay dependency-free. Swapping to another variable face works when that package is shipped with `tw`; static `@fontsource/*` imports are out of scope. Users override or remove the default by editing `main.css` like any other scratchpad content.
+**Bundled fonts**:
+Variable faces shipped with `tw` and wired into new playgrounds' `src/main.css`. Playgrounds declare them; **Dev** resolves `@fontsource-variable/*` imports from `tw`'s own dependencies — playgrounds stay dependency-free. The default template sets Inter Variable on `--font-sans` (`font-sans`) and Lexend Variable on `--font-display` (`font-display`). Swapping or adding faces works when that package is also shipped with `tw`; static `@fontsource/*` imports are out of scope. Users override or remove bundled fonts by editing `main.css` like any other scratchpad content.
 _Avoid_: Fontsource (implementation name), webfont package, npm dep
 
 ## Constraints
 
 A playground's **name** is any non-empty, filesystem-safe label. It becomes the directory name under the store. Names with path separators, traversal segments, or other unsafe characters are rejected — never auto-slugified or silently rewritten.
 
-Legacy playgrounds created under the CDN layout are not detected or migrated. `tw dev` starts Vite over whatever is on disk. Template changes (e.g. adding a **bundled font**) apply only to new playgrounds from `tw add` — no backfill for existing ones.
+Legacy playgrounds created under the CDN layout are not detected or migrated. `tw dev` starts Vite over whatever is on disk. Template changes (e.g. adding **bundled fonts**) apply only to new playgrounds from `tw add` — no backfill for existing ones.
 
 ## Example dialogue
 
