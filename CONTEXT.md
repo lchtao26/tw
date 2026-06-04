@@ -21,8 +21,12 @@ The `tw open` command. Picks a playground (if name omitted), then **reveals its 
 _Avoid_: dev, serve, launch
 
 **Dev**:
-The `tw dev` command. Picks a playground (if name omitted), starts Vite + Tailwind with HMR over that playground's root, prints the served URL, and blocks until Ctrl-C. Preview path for playgrounds — required because Tailwind is not compiled for `file://`. Binds localhost only — not LAN-accessible. Does not reveal the folder; use **Open** or `tw path` for that. No `$TW_HOME/config.json`, no editor spawn, no browser auto-open — the user opens the printed URL themselves.
+The `tw dev` command. Picks a playground (if name omitted), starts Vite + Tailwind with HMR over that playground's root, prints the served URL, and blocks until Ctrl-C. Preview path for playgrounds — required because Tailwind is not compiled for `file://`. Binds localhost only — not LAN-accessible. While running in an interactive terminal, on-demand **Dev shortcuts** open the browser (`o`) or reveal the folder (`O`) — no auto-open on start. Startup prints a titled **Shortcuts** list when stdin is a TTY. Standalone **Open** still works without a running server.
 _Avoid_: open, serve, start
+
+**Dev shortcuts**:
+Keystrokes available while **Dev** is running. `o` opens the served URL in the default browser; `O` reveals the playground folder in the file manager ("reveal in folder" — same outcome as **Open**). Each press prints a one-line acknowledgment. Opt-in per press — not configured, not persisted.
+_Avoid_: hotkeys, bindings, config
 
 **Path**:
 The `tw path` command. Prints a playground's absolute directory path to stdout. For scripting (`cd`, `cp`, …). Complements **Open** — `tw open` is the GUI path, `tw path` is the stdout path. Both kept.

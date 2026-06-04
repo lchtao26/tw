@@ -5,6 +5,9 @@ import { describe, test } from 'node:test';
 
 import {
   formatAddSuccess,
+  formatDevOpened,
+  formatDevRevealed,
+  formatDevShortcutsList,
   formatDisplayPath,
   formatPlaygroundDevCommand,
   formatPlaygroundOpenCommand,
@@ -42,5 +45,28 @@ describe('messages', () => {
     assert.match(message, /^Playground "demo" is ready to go\.\n\n/);
     assert.match(message, /\n  path:  ~/);
     assert.match(message, /\n  next:  tw dev demo$/);
+  });
+
+  test('formatDevShortcutsList prints the titled shortcut list', () => {
+    assert.equal(
+      formatDevShortcutsList(),
+      [
+        '',
+        'Shortcuts',
+        '  o  open in browser',
+        '  O  reveal in folder',
+      ].join('\n'),
+    );
+  });
+
+  test('formatDevOpened prints the served URL', () => {
+    assert.equal(formatDevOpened('http://127.0.0.1:5173/'), '  → opened http://127.0.0.1:5173/');
+  });
+
+  test('formatDevRevealed shortens paths under the home directory', () => {
+    const home = os.homedir();
+    const root = path.join(home, '.tw', 'playgrounds', 'demo');
+
+    assert.equal(formatDevRevealed(root), `  → revealed ${path.join('~', '.tw', 'playgrounds', 'demo')}`);
   });
 });
