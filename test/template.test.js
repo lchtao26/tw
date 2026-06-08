@@ -42,5 +42,13 @@ describe('template', () => {
     );
 
     assert.equal(actualCss, expectedCss);
+
+    const expectedAgent = fs.readFileSync(
+      path.join(fixtureRoot, 'AGENT.md'),
+      'utf8',
+    );
+    const actualAgent = fs.readFileSync(path.join(tempDir, 'AGENT.md'), 'utf8');
+
+    assert.equal(actualAgent, expectedAgent);
   });
 });

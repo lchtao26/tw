@@ -5,8 +5,12 @@
 ## Language
 
 **Playground**:
-A named scratchpad for Tailwind experimentation. Lives at `$TW_HOME/playgrounds/<name>/` as a two-file minimum: `index.html` plus `src/main.css` with `@import "tailwindcss"`. New playgrounds also ship **bundled fonts** and **bundled icons** — wired through `src/main.css`; assets and icon data live with `tw`, not in the playground folder. Default fonts: Inter Variable on the sans stack, Lexend Variable on the display stack. Tailwind is compiled by `tw`'s bundled Vite toolchain — not a browser CDN. Preview requires `tw dev`; `file://` does not work. The name is stored as-is — it is the folder name on disk.
+A named scratchpad for Tailwind experimentation. Lives at `$TW_HOME/playgrounds/<name>/` as `index.html` plus `src/main.css` with `@import "tailwindcss"`, and **Agent instructions** on new playgrounds. **Markup** — Tailwind utility classes and HTML structure — belongs in `index.html`. **Wiring** — Tailwind import, `@theme`, **bundled fonts**, **bundled icons** — belongs in `src/main.css` unless the user explicitly asks to change theme or fonts. Assets and icon data live with `tw`, not in the playground folder. Default fonts: Inter Variable on the sans stack, Lexend Variable on the display stack. Tailwind is compiled by `tw`'s bundled Vite toolchain — not a browser CDN. Preview requires `tw dev`; `file://` does not work. The name is stored as-is — it is the folder name on disk.
 _Avoid_: project, template, sample, demo, sketch
+
+**Agent instructions**:
+`AGENT.md` shipped with new playgrounds. Opens with a one-line **tw playground** identity so agents know this is not a normal npm project. Agent-targeted, editor-agnostic guidance for any coding agent working in a **Playground** — short headed sections (~30–40 lines), not a flat rule list or tutorial. Put utilities in `index.html`, leave `src/main.css` for wiring, never add a package manager or build toolchain (`package.json`, Vite/Tailwind config, frameworks); **Dev** already compiles Tailwind. Documents **bundled fonts** (`font-sans`, `font-display`) and **bundled icons** (**dynamic icon classes** only — no icon packages). Extra static files (images, a small script) are fine when the user explicitly asks. Preview is the human's job: **Dev** must be running (`tw dev`); agents do not start or stop the server — they edit files and HMR applies changes.
+_Avoid_: AGENTS.md, README, rules file
 
 **Store**:
 The directory holding all playgrounds — `$TW_HOME/playgrounds/`. Singular across a user. Not per-project, not per-CWD.
