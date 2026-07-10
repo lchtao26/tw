@@ -3,6 +3,8 @@ import { EventEmitter } from 'node:events';
 import readline from 'node:readline';
 import { test } from 'node:test';
 
+import { attachDevShortcuts } from '../lib/devShortcuts.js';
+
 function createFakeStdin() {
   const stdin = new EventEmitter();
   stdin.isTTY = true;
@@ -72,4 +74,43 @@ test('resuming stdin restores shortcut handling after editor prompt', () => {
 
   stdin.emit('keypress', 'o', { sequence: 'o', name: 'o' });
   assert.equal(keypressCount, 1);
+});
+
+test('Ctrl-C is ignored while editor prompt is busy', () => {
+  const stdin = createFakeStdin();
+  let exitCount = 0;
+
+  readline.emitKeypressEvents(stdin);
+  stdin.setRawMode(true);
+  stdin.resume();
+
+  const originalStdin = process.stdin;
+  Object.defineProperty(process, 'stdin', {
+    configurable: true,
+    value: stdin,
+  });
+
+  try {
+    attachDevShortcuts({
+      url: 'http://127.0.0.1:5173/',
+      folder: '/tmp/playground',
+      onExit: () => {
+        exitCount += 1;
+      },
+    });
+
+    stdin.emit('keypress', 'e', { sequence: 'e', name: 'e' });
+    stdin.emit('keypress', '\x03', {
+      sequence: '\x03',
+      name: 'c',
+      ctrl: true,
+    });
+
+    assert.equal(exitCount, 0);
+  } finally {
+    Object.defineProperty(process, 'stdin', {
+      configurable: true,
+      value: originalStdin,
+    });
+  }
 });

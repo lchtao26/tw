@@ -2,6 +2,8 @@
 @import '@fontsource-variable/lexend';
 @import 'tailwindcss';
 
+@plugin '@iconify/tailwind4';
+
 @theme {
   --font-sans:
     'Inter Variable', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
